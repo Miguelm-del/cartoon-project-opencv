@@ -31,10 +31,8 @@ def cartoonize(img, k):
     return cartoon
 
 
-# img = cv.imread("../../assets/legion.png")
-cap = cv.VideoCapture("../../assets/mylife.mp4")
+cap = cv.VideoCapture("../../assets/village.mp4")
 
-# Method to convert image to image cartoonized
 
 if (cap.isOpened() == False):
     print("Error opening video ")
@@ -47,28 +45,15 @@ while (cap.isOpened()):
 
     fps = int(cap.get(cv.CAP_PROP_FPS))
 
-    # fourcc = cv.VideoWriter_fourcc(*'FMP4')
-    # outCap = cv.VideoWriter('outpy.mp4', fourcc, fps,
-    #                    (frame_width, frame_height))
-
     ret, frame = cap.read()
     if ret == True:
         cartoonized = cartoonize(frame, 8)
         cv.imshow("Frame", cartoonized)
-        # outCap.write(cartoonized)
+
         if cv.waitKey(26) & 0xFF == ord('q'):
             break
     else:
         break
 
 cap.release()
-outCap.release()
 cv.destroyAllWindows()
-
-
-#cartoonized = cartoonize(img, 8)
-
-#cv.imshow("Input", img)
-#cv.imshow("Output", cartoonized)
-#cv.imwrite("cartoon.jpg", cartoonized)
-# cv.waitKey(0)

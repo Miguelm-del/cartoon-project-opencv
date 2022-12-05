@@ -2,22 +2,20 @@ import cv2 as cv
 import numpy as np
 
 
-def cartoonize(img):
-    greyCap = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    greyCap = cv.medianBlur(greyCap, 5)
+def edge_mask(img, line_size, blur_value):
+    gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+    gray_blur = cv.medianBlur(gray, blur_value)
     edges = cv.adaptiveThreshold(
-        greyCap, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 9, 9)
-
-    color = cv.bilateralFilter(img, 9, 250, 250)
-    cartoon = cv.bitwise_and(color, color, mask=edges)
-
-    return cartoon
+        gray_blur, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, line_size, blur_value)
+    return edges
 
 
 cap = cv.VideoCapture("../../assets/village.mp4")
+line_size = 3
+blur_value = 3
 
 if (cap.isOpened() == False):
-    print("Error opening video ")
+    print("Error open video ")
 
 while (cap.isOpened()):
     frame_width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
@@ -28,8 +26,8 @@ while (cap.isOpened()):
     ret, frame = cap.read()
     if ret == True:
         cv.imshow("Frame", frame)
-        cartoonized = cartoonize(frame)
-        cv.imshow("Frame Cartoonized", cartoonized)
+        cartoonized = edge_mask(frame, line_size, blur_value)
+        cv.imshow("Frame Cartoonied", cartoonized)
 
         if cv.waitKey(26) & 0xFF == ord('q'):
             break

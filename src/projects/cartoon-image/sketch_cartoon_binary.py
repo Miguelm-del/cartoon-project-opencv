@@ -1,6 +1,6 @@
 import cv2 as cv
 
-input_filename = "../../assets/gopher.png"
+input_filename = "../../assets/ifal.png"
 img = cv.imread(input_filename)
 
 if img is None:
