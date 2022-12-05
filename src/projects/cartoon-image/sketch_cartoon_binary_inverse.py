@@ -1,6 +1,6 @@
 import cv2 as cv
 
-input_filename = "../../assets/gopher.png"
+input_filename = "../../assets/ifal.png"
 img = cv.imread(input_filename)
 
 if img is None:
@@ -20,7 +20,7 @@ blur_value = 3
 
 edges = edge_mask(img, line_size, blur_value)
 
-output_filename = "cartoon.jpg"
+output_filename = "cartoon_inverse.jpg"
 cv.imwrite(output_filename, edges)
 cv.imshow("Sketch cartoon binary inverse", edges)
 cv.waitKey(0)
