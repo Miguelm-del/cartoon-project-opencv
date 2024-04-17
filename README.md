@@ -1,5 +1,7 @@
 # Cartoon Project Opencv
 
+Códigos Python usando OpenCV para transformar imagens em _Cartoon_
+
 ## Dependências para executar o código:
 
 ### Instalar o pip no linux:
